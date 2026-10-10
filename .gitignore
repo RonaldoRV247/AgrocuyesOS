@@ -1,0 +1,22 @@
+# ---------- build ----------
+backend/target/
+frontend/node_modules/
+frontend/dist/
+frontend/build/
+coverage/
+
+# ---------- entorno / secretos ----------
+.env
+.env.*
+!.env.example
+
+# ---------- estado de herramientas / IDE ----------
+.commandcode/
+.idea/
+.vscode/
+*.iml
+.DS_Store
+
+# ---------- logs y datos locales ----------
+*.log
+pgdata/

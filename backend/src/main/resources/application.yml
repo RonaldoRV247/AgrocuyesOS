@@ -1,0 +1,48 @@
+spring:
+  application:
+    name: agrocuyes-backend
+
+  jackson:
+    # Contrato del API de sync en snake_case (device_id, updated_at, server_payload):
+    # es el formato que manejan los clientes moviles y el JSONB del backend.
+    property-naming-strategy: SNAKE_CASE
+
+  datasource:
+    url: ${AGROCUYES_DB_URL:jdbc:postgresql://localhost:5432/agrocuyes}
+    username: ${AGROCUYES_DB_USER:agrocuyes}
+    password: ${AGROCUYES_DB_PASSWORD:agrocuyes}
+    hikari:
+      maximum-pool-size: 20
+
+  jpa:
+    # El esquema es propiedad de Flyway, nunca de Hibernate.
+    hibernate:
+      ddl-auto: validate
+    open-in-view: false
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 50
+          time_zone: UTC
+        order_inserts: true
+        order_updates: true
+
+  flyway:
+    enabled: true
+    locations: classpath:db/migration
+    baseline-on-migrate: false
+
+server:
+  port: ${PORT:8080}
+  error:
+    include-message: always
+
+agrocuyes:
+  sync:
+    # Tolerancia de reloj (ms) entre dispositivos de campo y el servidor.
+    # Un cambio "del futuro" mas alla de esta ventana se rechaza como INVALID.
+    max-clock-skew-ms: 300000
+
+logging:
+  level:
+    com.agrocuyes.os: INFO

@@ -37,7 +37,7 @@ docs/        Documentación de arquitectura y decisiones
 
 | | |
 |---|---|
-| Push de cambios + arbitraje LWW + JSONB + Flyway | **Implementado**, 13/13 tests sobre Postgres real |
+| Push de cambios + arbitraje LWW + JSONB + Flyway | **Implementado**: 13/13 tests (10 de arbitraje LWW, 3 sobre PostgreSQL real con Testcontainers) |
 | Pull delta y autenticación | Diseñados, pendientes |
 | Frontend | Pendiente |
 

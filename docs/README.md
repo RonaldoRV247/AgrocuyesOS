@@ -20,10 +20,10 @@ preparado para **ingesta de datos vía IA**.
 
 | Componente | Estado |
 |---|---|
-| Núcleo de sincronización (push + LWW + JSONB + Flyway) | **Implementado y probado** (13/13 tests, Postgres real vía Testcontainers) |
+| Núcleo de sincronización (push + LWW + JSONB + Flyway) | **Implementado y probado**: 13/13 tests (10 de arbitraje LWW sin BD, 3 de rebanada vertical sobre PostgreSQL real con Testcontainers) |
 | Pull delta (el servidor devuelve cambios al dispositivo) | Diseñado, **no implementado** |
 | Autenticación Google OAuth2 → JWT | Diseñado en [05-seguridad.md](05-seguridad.md), **no implementado** |
-| Frontend (móvil y web) | Sin código todavía (capa `frontend/` vacía) |
+| Frontend (móvil y web) | Sin código todavía (solo `frontend/README.md` con las reglas que ya le aplican) |
 
 ## Reglas de diseño que no se negocian
 

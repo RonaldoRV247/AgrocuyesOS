@@ -1,0 +1,48 @@
+name: agrocuyes_mobile
+description: >-
+  Cliente movil offline-first de AgrocuyesOS. Diseñado para campo: luz solar
+  directa, manos ocupadas y sesiones largas sin señal.
+publish_to: "none"
+version: 0.1.0+1
+
+environment:
+  sdk: ">=3.5.0 <4.0.0"
+  flutter: ">=3.24.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+
+  # Estado reactivo. Riverpod y no otro: la UI se reconstruye por lectura de
+  # stream (Drift -> watch()), no por setState manual en cada pantalla.
+  flutter_riverpod: ^2.5.1
+
+  # Persistencia local. SQLite embebido + codegen de tipos.
+  drift: ^2.22.1
+  sqlite3_flutter_libs: ^0.5.27
+  path_provider: ^2.1.4
+  path: ^1.9.0
+
+  # Identidad local de cada registro (clave de idempotencia del sync).
+  uuid: ^4.5.1
+
+  # Auth persistente estilo WhatsApp (ver docs/05-seguridad.md: el backend
+  # todavia NO valida JWT; este adaptador queda detras de AuthRepository).
+  google_sign_in: ^6.2.4
+  flutter_secure_storage: ^9.2.2
+
+  # Sync + cola de reintentos.
+  dio: ^5.7.0
+  connectivity_plus: ^6.1.0
+
+  intl: ^0.19.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+  drift_dev: ^2.22.1
+  build_runner: ^2.4.13
+  flutter_lints: ^4.0.0
+
+flutter:
+  uses-material-design: true

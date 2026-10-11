@@ -1,0 +1,13 @@
+include: package:flutter_lints/flutter.yaml
+
+analyzer:
+  exclude:
+    - "**/*.g.dart"
+  language:
+    strict-casts: true
+
+linter:
+  rules:
+    - prefer_final_locals
+    - prefer_const_constructors
+    - avoid_slow_async_io

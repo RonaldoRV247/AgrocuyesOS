@@ -8,8 +8,11 @@ JSONB y catálogos definidos por el usuario (no enums).
 
 ## Stack
 
-Spring Boot 3.5 · Java 21 · PostgreSQL 13+ (JSONB, GIN, FK diferidas) · Flyway ·
-Clean Architecture.
+Backend: Spring Boot 3.5 · Java 21 · PostgreSQL 13+ (JSONB, GIN, FK diferidas) ·
+Flyway · Clean Architecture.
+
+Móvil: Flutter · Riverpod · Drift (SQLite) · SyncWorker LWW · Google Sign-In
+persistente (andamiado en `frontend/mobile/`).
 
 ## Documentación
 
@@ -24,13 +27,14 @@ Toda la documentación vive en [`docs/`](docs/README.md):
 | [05 · Seguridad](docs/05-seguridad.md) | Google OAuth2 → JWT (diseño, aún **sin implementar**) |
 | [06 · Decisiones](docs/06-decisiones.md) | Once decisiones con alternativa descartada y motivo |
 | [07 · Roadmap](docs/07-roadmap.md) | Hecho, Fase 1–4 y deuda técnica |
+| [08 · Cliente móvil](docs/08-cliente-movil.md) | Flutter: estructura feature-first, Drift, outbox LWW, UI de rural |
 
 ## Estructura del repo
 
 ```
-backend/     API Spring Boot (nucleo de sync implementado y probado)
-frontend/    Clientes móvil/web (aún sin código)
-docs/        Documentación de arquitectura y decisiones
+backend/         API Spring Boot (nucleo de sync implementado y probado)
+frontend/mobile/ Cliente Flutter (andamiado: esquema Drift, sync, UI de campo)
+docs/            Documentación de arquitectura y decisiones
 ```
 
 ## Estado
@@ -38,8 +42,9 @@ docs/        Documentación de arquitectura y decisiones
 | | |
 |---|---|
 | Push de cambios + arbitraje LWW + JSONB + Flyway | **Implementado**: 13/13 tests (10 de arbitraje LWW, 3 sobre PostgreSQL real con Testcontainers) |
-| Pull delta y autenticación | Diseñados, pendientes |
-| Frontend | Pendiente |
+| Cliente móvil | **Andamiado** ([docs/08](docs/08-cliente-movil.md)): Drift + Riverpod + SyncWorker + botones dinámicos. Escrito contra el contrato, **sin compilar** (falta `flutter pub get` + `build_runner`) |
+| Pull delta y autenticación | Diseñados, pendientes en el backend; el cliente ya deja el hueco (watermark local, `/auth/*`) |
+| Web | Pendiente |
 
 ⚠️ El endpoint de sincronización **no está autenticado** todavía y el `device_id`
 es autodeclarado: no exponer a producción hasta cerrar el módulo de seguridad.
@@ -58,4 +63,12 @@ Pruebas (requiere Maven 3.9+/JDK 21, o el comando Docker de
 
 ```bash
 cd backend && mvn test
+```
+
+## Arrancar el móvil
+
+```bash
+cd frontend/mobile
+flutter pub get && dart run build_runner build --delete-conflicting-outputs
+flutter test
 ```

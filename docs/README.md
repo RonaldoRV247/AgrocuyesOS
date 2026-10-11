@@ -15,6 +15,7 @@ preparado para **ingesta de datos vía IA**.
 | [05-seguridad.md](05-seguridad.md) | Diseño de autenticación Google OAuth2 → JWT (acceso corto / refresh perpetuo) |
 | [06-decisiones.md](06-decisiones.md) | Decisiones de arquitectura con alternativa descartada y motivo |
 | [07-roadmap.md](07-roadmap.md) | Qué está implementado y qué sigue, por fases |
+| [08-cliente-movil.md](08-cliente-movil.md) | App Flutter: arquitectura feature-first, Drift, cola LWW, UI de rural |
 
 ## Estado del sistema (resumen honesto)
 
@@ -23,7 +24,7 @@ preparado para **ingesta de datos vía IA**.
 | Núcleo de sincronización (push + LWW + JSONB + Flyway) | **Implementado y probado**: 13/13 tests (10 de arbitraje LWW sin BD, 3 de rebanada vertical sobre PostgreSQL real con Testcontainers) |
 | Pull delta (el servidor devuelve cambios al dispositivo) | Diseñado, **no implementado** |
 | Autenticación Google OAuth2 → JWT | Diseñado en [05-seguridad.md](05-seguridad.md), **no implementado** |
-| Frontend (móvil y web) | Sin código todavía (solo `frontend/README.md` con las reglas que ya le aplican) |
+| Frontend (móvil Flutter / web) | Móvil **andamiado** en `frontend/mobile/` con Drift + Riverpod + SyncWorker ([08](08-cliente-movil.md)): escrito contra el contrato, **sin compilar todavía** (falta toolchain y codegen). Web: sin código |
 
 ## Reglas de diseño que no se negocian
 
